@@ -1,13 +1,13 @@
 {
   "name": "lfs-auto-track",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "git lfs auto track module",
   "repository": "suhaotian/lfs-auto-track",
   "bugs": "https://github.com/suhaotian/lfs-auto-track/issues",
   "homepage": "https://github.com/suhaotian/lfs-auto-track",
   "main": "lib/index.js",
   "bin": {
-    "auto-track-lfs": "bin/index.js"
+    "lfs-auto-track": "bin/index.js"
   },
   "scripts": {
     "build": "rm -rf lib && tsc --project tsconfig.json",
@@ -44,7 +44,7 @@
   },
   "lint-staged": {
     "*": [
-      "node bin/index.js 'jpg,jpeg,png,gif:100kb;*:1024kb'"
+      "node bin/index.js 'image,video,audio:100kb;*:1024kb'"
     ],
     "*.{ts,tsx,mts}": [
       "prettier --write",
@@ -62,8 +62,11 @@
   "keywords": [
     "lfs",
     "git lfs",
+    "large files",
     "auto track",
-    "pre-commit"
+    "pre-commit",
+    "husky",
+    "lint-staged"
   ],
   "author": "suhaotian",
   "license": "MIT"
