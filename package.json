@@ -1,7 +1,10 @@
 {
   "name": "lfs-auto-track",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "git lfs auto track module",
+  "repository": "suhaotian/lfs-auto-track",
+  "bugs": "https://github.com/suhaotian/lfs-auto-track/issues",
+  "homepage": "https://github.com/suhaotian/lfs-auto-track",
   "main": "lib/index.js",
   "bin": {
     "auto-track-lfs": "bin/index.js"
