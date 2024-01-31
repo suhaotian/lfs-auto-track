@@ -29,7 +29,7 @@ Add `lint-staged` script in `package.json`
 }
 ```
 
-> `'jpg,jpeg,png,gif:100;video,audio:200;*:1024'` means files with extension `jpg,jpeg,png,gif`, if size bigger than 100kb, if video/audio files size bigger than 200kb, and if any files biiger than 1024kb, these files will add to `.gitattributes` for `git lfs track`.
+> `'jpg,jpeg,png,gif:100;video,audio:200;*:1024'` means files with extension `jpg,jpeg,png,gif`, also if size bigger than 100kb, if video/audio files size bigger than 200kb, and finally if any files bigger than 1024kb, these files will add to `.gitattributes` for `git lfs track`.
 
 ## Examples
 
@@ -37,10 +37,10 @@ Add `lint-staged` script in `package.json`
 
 ## Some questions
 
-- How to upload the large file?
+- How to upload the large file after track?
 
 ```sh
-git lfs push
+git lfs push --all origin
 ```
 
 - How to clone the project without download the large file?
@@ -49,8 +49,8 @@ git lfs push
 GIT_LFS_SKIP_SMUDGE=1 git clone THE_REPO_URL
 ```
 
-- How to fetch the large files?
+- How to download the large files?
 
 ```sh
-git lfs fetch
+git lfs pull
 ```
