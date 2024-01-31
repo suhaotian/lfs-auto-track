@@ -33,7 +33,7 @@ Add `lint-staged` script in `package.json`
 
 ## Examples
 
-- Check this repo code (`package.json` / `imgs/`)
+- Check the repo source code (`package.json` / `imgs/`)
 
 ## Some questions
 

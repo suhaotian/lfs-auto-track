@@ -1,6 +1,6 @@
 {
   "name": "lfs-auto-track",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "git lfs auto track module",
   "repository": "suhaotian/lfs-auto-track",
   "bugs": "https://github.com/suhaotian/lfs-auto-track/issues",
