@@ -1,6 +1,6 @@
 # lfs-auto-track
 
-If the files bigger than the size(you can configure, check the usage part), when commit, automatically run `git lfs track` files.
+If the files bigger than the size (you can configure, check the usage part), when commit, automatically run `git lfs track` files.
 
 ## Usage
 
@@ -41,7 +41,7 @@ Add `lint-staged` script in `package.json`
 
 ### Examples
 
-- Check the repo source code (`package.json` / `imgs/`)
+- Check the repo source code (`package.json` / `imgs/`) [This file should be store in LFS](https://github.com/suhaotian/lfs-auto-track/blob/main/imgs/dive.jpg)
 
 ### Some questions
 

@@ -9,14 +9,14 @@ importers:
   .:
     dependencies:
       mime:
-        specifier: ^3
+        specifier: ^3.0.0
         version: 3.0.0
     devDependencies:
       '@tsconfig/recommended':
         specifier: ^1.0.8
         version: 1.0.8
       '@types/mime':
-        specifier: ^3
+        specifier: ^3.0.0
         version: 3.0.4
       '@types/node':
         specifier: ^20.11.13

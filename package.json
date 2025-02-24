@@ -1,6 +1,6 @@
 {
   "name": "lfs-auto-track",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "git lfs auto track module",
   "repository": "suhaotian/lfs-auto-track",
   "bugs": "https://github.com/suhaotian/lfs-auto-track/issues",
@@ -16,7 +16,7 @@
     "start-publish": "pnpm test && node scripts/purge-pkg-for-publish.mjs && npm publish --access public --no-git-checks --provenance --registry=https://registry.npmjs.org"
   },
   "dependencies": {
-    "mime": "^3"
+    "mime": "^3.0.0"
   },
   "devDependencies": {
     "husky": "^9.1.7",
@@ -27,7 +27,7 @@
     "@types/node": "^20.11.13",
     "eslint-config-universe": "^14.0.0",
     "@tsconfig/recommended": "^1.0.8",
-    "@types/mime": "^3"
+    "@types/mime": "^3.0.0"
   },
   "prettier": {
     "printWidth": 100,
