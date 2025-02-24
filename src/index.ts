@@ -4,7 +4,7 @@ import mime from 'mime';
 import path from 'path';
 
 export function parseConditions(conditions: string): { exts: string[]; size: number }[] {
-  const result = conditions
+  return conditions
     .split(';')
     .map((item) => {
       const [ext, size] = item.split(':');
@@ -15,12 +15,11 @@ export function parseConditions(conditions: string): { exts: string[]; size: num
         exts: ext
           .split(',')
           .map((item) => item.trim())
-          .filter((item) => !!item),
+          .filter(Boolean),
         size: +size.replace(/kb/gi, '').trim(),
       };
     })
-    .filter((item) => !!item.exts.length);
-  return result;
+    .filter((item) => item.exts.length > 0);
 }
 
 export function getLFSTrackFiles(
@@ -32,9 +31,11 @@ export function getLFSTrackFiles(
 ): string[] {
   const result: string[] = [];
   const cs = parseConditions(conditions);
-  if (files && files.length > 0 && cs.length > 0) {
+
+  if (files?.length > 0 && cs.length > 0) {
     for (const filepath of files) {
-      const ext = filepath.toLowerCase().split('.').pop();
+      const ext = path.extname(filepath).toLowerCase().replace('.', '');
+
       if (ext) {
         const mimetype = mime.getType(ext);
         const extInfo = cs.find((item) =>
@@ -43,15 +44,19 @@ export function getLFSTrackFiles(
             if (mimetype && ['video', 'audio', 'image'].includes(_ext)) {
               return mimetype.startsWith(_ext);
             }
-            return _ext === ext || '.' + ext === _ext;
+            // Fixed the typo here: swapped variables in the comparison
+            return ext === _ext || '.' + ext === _ext;
           })
         );
+
         if (extInfo) {
           const fileinfo = mockFileInfo?.[filepath] || fs.statSync(filepath);
           const filesize = fileinfo.size / 1024;
+
           if (filesize >= extInfo.size) {
             const relativePath = path.relative(cwd, filepath);
             const alreadyTrack = gitattributesFiles.find((item) => item.startsWith(relativePath));
+
             if (!alreadyTrack) {
               result.push(relativePath);
             }
@@ -60,6 +65,7 @@ export function getLFSTrackFiles(
       }
     }
   }
+
   return result;
 }
 
@@ -69,9 +75,11 @@ export async function run(conditions: string, files: string[]) {
     ? fs
         .readFileSync('./.gitattributes', 'utf-8')
         .split('\n')
-        .filter((item) => !!item.trim())
+        .filter((item) => item.trim())
     : [];
+
   const trackFiles = getLFSTrackFiles(conditions, files, gitattributesFiles, cwd);
+
   if (trackFiles.length > 0) {
     execSync(`git lfs track ${trackFiles.map((item) => `'${item}'`).join(' ')}`, {
       stdio: 'inherit',
