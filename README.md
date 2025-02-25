@@ -1,4 +1,4 @@
-# [LFS Auto Track](https://npmjs.org/package/lfs-auto-track) &middot; [![Window E2E Tests](https://github.com/suhaotian/lfs-auto-track/actions/workflows/windows.e2e-test.yml/badge.svg)][![Linux E2E Tests](https://github.com/suhaotian/lfs-auto-track/actions/workflows/linux.e2e-test.yml/badge.svg)]
+# [LFS Auto Track](https://npmjs.org/package/lfs-auto-track) &middot; ![Window E2E Tests](https://github.com/suhaotian/lfs-auto-track/actions/workflows/windows.e2e-test.yml/badge.svg)![Linux E2E Tests](https://github.com/suhaotian/lfs-auto-track/actions/workflows/linux.e2e-test.yml/badge.svg)
 
 # lfs-auto-track
 
