@@ -1,0 +1,67 @@
+name: LFS Auto Track E2E Test on Windows
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Set Up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 9
+          run_install: false
+
+      - name: Install Git LFS
+        run: |
+          choco install git-lfs
+          git lfs install
+
+      - name: Install Dependencies
+        run: |
+          pnpm install && husky
+
+      - name: Build lib
+        run: |
+          pnpm run build
+
+      - name: Run unit tests
+        run: |
+          pnpm run test
+
+      - name: Create E2E Test Files
+        run: |
+          cd lfs-auto-track-test
+          fsutil file createnew small.txt 1024
+          fsutil file createnew large.txt 2097152
+          fsutil file createnew small.jpg 51200
+          fsutil file createnew large.jpg 153600
+          git add .
+
+      - name: Commit Files
+        run: |
+          cd lfs-auto-track-test
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git commit -m "Test lfs-auto-track functionality"
+
+      - name: Verify LFS Tracking
+        run: |
+          git lfs ls-files
+          type .gitattributes
