@@ -74,5 +74,34 @@ jobs:
 
       - name: Verify LFS Tracking
         run: |
+          # Check if large files are tracked by LFS
+          echo "LFS tracked files:"
           git lfs ls-files
+
+          # Verify large.txt is tracked
+          if git lfs ls-files | grep -q "large.txt"; then
+            echo "✅ large.txt is tracked by LFS as expected"
+          else
+            echo "❌ large.txt is NOT tracked by LFS"
+            exit 1
+          fi
+
+          # Verify large.jpg is tracked
+          if git lfs ls-files | grep -q "large.jpg"; then
+            echo "✅ large.jpg is tracked by LFS as expected"
+          else
+            echo "❌ large.jpg is NOT tracked by LFS"
+            exit 1
+          fi
+
+          # Check .gitattributes content
+          echo "Git attributes content:"
           cat .gitattributes
+
+          # Verify .gitattributes contains proper LFS patterns
+          if grep -q "large.jpg filter=lfs" .gitattributes && grep -q "large.txt filter=lfs" .gitattributes; then
+            echo "✅ .gitattributes contains correct LFS patterns"
+          else
+            echo "❌ .gitattributes does not contain expected LFS patterns"
+            exit 1
+          fi

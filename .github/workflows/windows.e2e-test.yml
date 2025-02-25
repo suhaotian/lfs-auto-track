@@ -63,7 +63,38 @@ jobs:
           git config user.email "actions@github.com"
           git commit -m "Test lfs-auto-track functionality"
 
+
       - name: Verify LFS Tracking
         run: |
-          git lfs ls-files
-          type .gitattributes
+          # Check if large files are tracked by LFS
+          $lfsFiles = git lfs ls-files
+          echo "LFS tracked files: $lfsFiles"
+          
+          # Verify large.txt is tracked
+          if ($lfsFiles -match "large\.txt") {
+            echo "✅ large.txt is tracked by LFS as expected"
+          } else {
+            echo "❌ large.txt is NOT tracked by LFS"
+            exit 1
+          }
+          
+          # Verify large.jpg is tracked
+          if ($lfsFiles -match "large\.jpg") {
+            echo "✅ large.jpg is tracked by LFS as expected"
+          } else {
+            echo "❌ large.jpg is NOT tracked by LFS"
+            exit 1
+          }
+          
+          # Check .gitattributes content
+          $gitAttributes = Get-Content .gitattributes
+          echo "Git attributes content:"
+          echo $gitAttributes
+          
+          # Verify .gitattributes contains proper LFS patterns
+          if ($gitAttributes -match "large\.jpg filter=lfs" -and $gitAttributes -match "large\.txt filter=lfs") {
+            echo "✅ .gitattributes contains correct LFS patterns"
+          } else {
+            echo "❌ .gitattributes does not contain expected LFS patterns"
+            exit 1
+          }

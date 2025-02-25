@@ -1,3 +1,5 @@
+# [LFS Auto Track](https://npmjs.org/package/lfs-auto-track) &middot; [![Window E2E Tests](https://github.com/suhaotian/lfs-auto-track/actions/workflows/windows.e2e-test.yml/badge.svg)][![Linux E2E Tests](https://github.com/suhaotian/lfs-auto-track/actions/workflows/linux.e2e-test.yml/badge.svg)]
+
 # lfs-auto-track
 
 If the files bigger than the size (you can configure, check the usage part), when commit, automatically run `git lfs track` files.
