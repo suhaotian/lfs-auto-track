@@ -44,7 +44,7 @@
   },
   "lint-staged": {
     "*": [
-      "node bin/index.js 'image,video,audio:100kb;*:1024kb'"
+      "node ./bin/index.js 'image,video,audio:100kb;*:1024kb'"
     ],
     "*.{ts,tsx,mts}": [
       "prettier --write",

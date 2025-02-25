@@ -44,7 +44,15 @@ jobs:
 
       - name: Build lib
         run: |
-          pnpm run build
+          pnpm build
+
+      - name: Check ./lib
+        run: |
+          ls lib
+
+      - name: Check ./bin
+        run: |
+          ls bin
 
       - name: Run unit tests
         run: |
