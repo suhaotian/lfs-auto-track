@@ -56,7 +56,7 @@ jobs:
           fsutil file createnew small.jpg 51200
           fsutil file createnew large.jpg 153600
           git add .
-          dir /s *.txt *.jpg /a-d
+          (dir /s /a-d *.txt) & (dir /s /a-d *.jpg)
 
       - name: Commit Files
         run: |
