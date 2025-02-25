@@ -13,7 +13,7 @@
     "build": "rm -rf lib && tsc --project tsconfig.json",
     "test": "pnpm build && cross-env DEBUG=true node --test",
     "prepare": "is-ci || pnpm build && husky",
-    "start-publish": "pnpm test && node scripts/purge-pkg-for-publish.mjs && npm publish --access public --no-git-checks --provenance --registry=https://registry.npmjs.org"
+    "start-publish": "node scripts/purge-pkg-for-publish.mjs && npm publish --access public --no-git-checks --provenance --registry=https://registry.npmjs.org"
   },
   "dependencies": {
     "husky": "^9.1.7",

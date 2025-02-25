@@ -46,3 +46,5 @@ jobs:
         run: pnpm start-publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN_ELEVATED }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN_ELEVATED }}
+
