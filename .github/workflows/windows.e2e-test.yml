@@ -51,7 +51,6 @@ jobs:
 
       - name: Create E2E Test Files
         run: |
-          cd lfs-auto-track-test
           fsutil file createnew small.txt 1024
           fsutil file createnew large.txt 2097152
           fsutil file createnew small.jpg 51200
@@ -60,7 +59,6 @@ jobs:
 
       - name: Commit Files
         run: |
-          cd lfs-auto-track-test
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git commit -m "Test lfs-auto-track functionality"

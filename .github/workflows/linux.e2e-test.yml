@@ -52,7 +52,6 @@ jobs:
 
       - name: Create E2E Test Files
         run: |
-          cd lfs-auto-track-test
           truncate -s 1K small.txt
           truncate -s 2M large.txt
           truncate -s 50K small.jpg
@@ -61,7 +60,6 @@ jobs:
 
       - name: Commit Files
         run: |
-          cd lfs-auto-track-test
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git commit -m "Test lfs-auto-track functionality"
