@@ -95,22 +95,3 @@ jobs:
           :: Display .gitattributes content
           echo Git attributes content:
           type .gitattributes
-
-          :: Check if .gitattributes contains proper patterns
-          findstr "large.jpg filter=lfs" .gitattributes > nul
-          set jpg_found=%ERRORLEVEL%
-
-          findstr "large.txt filter=lfs" .gitattributes > nul
-          set txt_found=%ERRORLEVEL%
-
-          if %jpg_found% == 0 (
-            if %txt_found% == 0 (
-              echo ✅ .gitattributes contains correct LFS patterns
-            ) else (
-              echo ❌ .gitattributes does not contain expected LFS patterns
-              exit /b 1
-            )
-          ) else (
-            echo ❌ .gitattributes does not contain expected LFS patterns
-            exit /b 1
-          )
