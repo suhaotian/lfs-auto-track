@@ -39,7 +39,9 @@ Add `lint-staged` script in `package.json`
 
 > `'*:1024'` means any files size bigger than 1024 KB when commit, these files will add to `.gitattributes` with run command `git lfs track` automatically;
 
-> `'jpg,png,gif:1024'` means files with extension `jpg` or `png` or `gif` size bigger than 1024 KB when commit, these files will add to `.gitattributes` with run command `git lfs track` automatically.
+> The size units support `B` / `KB` / `MB` / `GB`, default is `KB`
+
+> `'jpg,png,gif:1MB'` means files with extension `jpg` or `png` or `gif` size bigger than 1 MB when commit, these files will add to `.gitattributes` with run command `git lfs track` automatically.
 
 ### Examples
 
