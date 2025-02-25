@@ -15,8 +15,11 @@ describe('e2e tests', () => {
       // 'small.jpg',
       // 'large.jpg',
     ];
-    await run('image,video,audio:100kb;*:1024kb', files);
+    const result = await run('image,video,audio:100kb;*:1024kb', files);
+    console.log('run() result: ');
+    console.log(result);
     const content = await fs.readFile('./.gitattributes', 'utf-8');
-    console.log('.gitattributes content: ', content);
+    console.log('.gitattributes content: ');
+    console.log(content);
   });
 });

@@ -114,4 +114,5 @@ export async function run(conditions: string, files: string[]) {
     });
     execSync(`git add .gitattributes`, { stdio: 'inherit' });
   }
+  return trackFiles;
 }
