@@ -7,17 +7,44 @@ export function parseConditions(conditions: string): { exts: string[]; size: num
   return conditions
     .split(';')
     .map((item) => {
-      const [ext, size] = item.split(':');
-      if (!ext || !size) {
+      const [ext, sizeStr] = item.split(':');
+      if (!ext || !sizeStr) {
         return { exts: [], size: 0 };
       }
-      return {
-        exts: ext
-          .split(',')
-          .map((item) => item.trim())
-          .filter(Boolean),
-        size: +size.replace(/kb/gi, '').trim(),
-      };
+
+      // Parse extensions
+      const exts = ext
+        .split(',')
+        .map((item) => item.trim())
+        .filter(Boolean);
+
+      // Parse size with unit conversion to bytes
+      let size = 0;
+      const sizeMatch = sizeStr.trim().match(/^(\d+(?:\.\d+)?)\s*(kb|mb|gb|b)?$/i);
+
+      if (sizeMatch) {
+        const value = parseFloat(sizeMatch[1]);
+        const unit = (sizeMatch[2] || 'kb').toLowerCase();
+
+        switch (unit) {
+          case 'b':
+            size = value;
+            break;
+          case 'kb':
+            size = value * 1024;
+            break;
+          case 'mb':
+            size = value * 1024 * 1024;
+            break;
+          case 'gb':
+            size = value * 1024 * 1024 * 1024;
+            break;
+          default:
+            size = value * 1024; // Default to KB if unit is unrecognized
+        }
+      }
+
+      return { exts, size };
     })
     .filter((item) => item.exts.length > 0);
 }
@@ -51,7 +78,7 @@ export function getLFSTrackFiles(
 
         if (extInfo) {
           const fileinfo = mockFileInfo?.[filepath] || fs.statSync(filepath);
-          const filesize = fileinfo.size / 1024;
+          const filesize = fileinfo.size;
 
           if (filesize >= extInfo.size) {
             const relativePath = path.relative(cwd, filepath);

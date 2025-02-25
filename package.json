@@ -16,18 +16,18 @@
     "start-publish": "pnpm test && node scripts/purge-pkg-for-publish.mjs && npm publish --access public --no-git-checks --provenance --registry=https://registry.npmjs.org"
   },
   "dependencies": {
+    "husky": "^9.1.7",
     "mime": "^3.0.0"
   },
   "devDependencies": {
-    "husky": "^9.1.7",
-    "lint-staged": "^15.4.3",
-    "prettier": "^3.5.2",
-    "is-ci": "^4.1.0",
-    "typescript": "^5.7.3",
+    "@tsconfig/recommended": "^1.0.8",
+    "@types/mime": "^3.0.0",
     "@types/node": "^20.11.13",
     "eslint-config-universe": "^14.0.0",
-    "@tsconfig/recommended": "^1.0.8",
-    "@types/mime": "^3.0.0"
+    "is-ci": "^4.1.0",
+    "lint-staged": "^15.4.3",
+    "prettier": "^3.5.2",
+    "typescript": "^5.7.3"
   },
   "prettier": {
     "printWidth": 100,
