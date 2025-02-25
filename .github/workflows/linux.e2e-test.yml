@@ -36,7 +36,11 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          pnpm install && husky
+          pnpm install
+
+      - name: Run husky
+        run: |
+          pnpm husky
 
       - name: Build lib
         run: |
