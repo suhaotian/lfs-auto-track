@@ -27,7 +27,8 @@
     "is-ci": "^4.1.0",
     "lint-staged": "^15.4.3",
     "prettier": "^3.5.2",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "cross-env": "^7.0.3"
   },
   "prettier": {
     "printWidth": 100,
@@ -44,7 +45,7 @@
   },
   "lint-staged": {
     "*": [
-      "node ./bin/index.js 'image,video,audio:100kb;*:1024kb'"
+      "cross-env DEBUG=true node ./bin/index.js 'image,video,audio:100kb;*:1024kb'"
     ],
     "*.{ts,tsx,mts}": [
       "prettier --write",

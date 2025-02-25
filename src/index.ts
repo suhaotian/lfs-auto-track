@@ -79,7 +79,8 @@ export function getLFSTrackFiles(
         if (extInfo) {
           const fileinfo = mockFileInfo?.[filepath] || fs.statSync(filepath);
           const filesize = fileinfo.size;
-
+          if (process.env.DEBUG)
+            console.log('filepath, extInfo.size, filesize', extInfo.size, filesize);
           if (filesize >= extInfo.size) {
             const relativePath = path.relative(cwd, filepath);
             const alreadyTrack = gitattributesFiles.find((item) => item.startsWith(relativePath));
