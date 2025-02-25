@@ -97,10 +97,10 @@ jobs:
           type .gitattributes
 
           :: Check if .gitattributes contains proper patterns
-          findstr /C:"large.jpg filter=lfs" .gitattributes > nul
+          findstr "large.jpg filter=lfs" .gitattributes > nul
           set jpg_found=%ERRORLEVEL%
 
-          findstr /C:"large.txt filter=lfs" .gitattributes > nul
+          findstr "large.txt filter=lfs" .gitattributes > nul
           set txt_found=%ERRORLEVEL%
 
           if %jpg_found% == 0 (
