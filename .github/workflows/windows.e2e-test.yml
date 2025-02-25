@@ -56,13 +56,14 @@ jobs:
           fsutil file createnew small.jpg 51200
           fsutil file createnew large.jpg 153600
           git add .
+          dir /s *.txt *.jpg /a-d
 
       - name: Commit Files
         run: |
           git config user.name "GitHub Actions"
           git config user.email "actions@github.com"
           git commit -m "Test lfs-auto-track functionality"
-
+          type .gitattributes
 
       - name: Verify LFS Tracking
         shell: cmd
