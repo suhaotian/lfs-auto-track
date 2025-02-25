@@ -45,10 +45,6 @@ jobs:
         run: |
           pnpm run build
 
-      - name: Run unit tests
-        run: |
-          pnpm run test
-
       - name: Create E2E Test Files
         run: |
           fsutil file createnew small.txt 1024
@@ -56,6 +52,10 @@ jobs:
           fsutil file createnew small.jpg 51200
           fsutil file createnew large.jpg 153600
           git add .
+
+      - name: Run unit tests
+        run: |
+          pnpm run test
 
       - name: Commit Files
         run: |
@@ -68,11 +68,11 @@ jobs:
         shell: cmd
         run: |
           @echo off
-          
+
           :: Display tracked LFS files
           echo LFS tracked files:
           git lfs ls-files
-          
+
           :: Check if large.txt is tracked by LFS
           git lfs ls-files | findstr "large.txt" > nul
           if %ERRORLEVEL% == 0 (
@@ -81,7 +81,7 @@ jobs:
             echo ❌ large.txt is NOT tracked by LFS
             exit /b 1
           )
-          
+
           :: Check if large.jpg is tracked by LFS
           git lfs ls-files | findstr "large.jpg" > nul
           if %ERRORLEVEL% == 0 (
@@ -90,18 +90,18 @@ jobs:
             echo ❌ large.jpg is NOT tracked by LFS
             exit /b 1
           )
-          
+
           :: Display .gitattributes content
           echo Git attributes content:
           type .gitattributes
-          
+
           :: Check if .gitattributes contains proper patterns
           findstr /C:"large.jpg filter=lfs" .gitattributes > nul
           set jpg_found=%ERRORLEVEL%
-          
+
           findstr /C:"large.txt filter=lfs" .gitattributes > nul
           set txt_found=%ERRORLEVEL%
-          
+
           if %jpg_found% == 0 (
             if %txt_found% == 0 (
               echo ✅ .gitattributes contains correct LFS patterns

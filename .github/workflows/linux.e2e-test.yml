@@ -54,10 +54,6 @@ jobs:
         run: |
           ls bin
 
-      - name: Run unit tests
-        run: |
-          pnpm run test
-
       - name: Create E2E Test Files
         run: |
           truncate -s 1K small.txt
@@ -65,6 +61,10 @@ jobs:
           truncate -s 50K small.jpg
           truncate -s 150K large.jpg
           git add .
+
+      - name: Run unit tests
+        run: |
+          pnpm run test
 
       - name: Commit Files
         run: |

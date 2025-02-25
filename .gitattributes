@@ -1,3 +1,2 @@
 imgs/dive.jpg filter=lfs diff=lfs merge=lfs -text
-imgs/dive2.jpg filter=lfs diff=lfs merge=lfs -text
 imgs/dive3.jpg filter=lfs diff=lfs merge=lfs -text
