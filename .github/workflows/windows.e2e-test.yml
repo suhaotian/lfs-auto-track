@@ -65,36 +65,51 @@ jobs:
 
 
       - name: Verify LFS Tracking
+        shell: cmd
         run: |
-          # Check if large files are tracked by LFS
-          $lfsFiles = git lfs ls-files
-          echo "LFS tracked files: $lfsFiles"
+          @echo off
           
-          # Verify large.txt is tracked
-          if ($lfsFiles -match "large\.txt") {
-            echo "✅ large.txt is tracked by LFS as expected"
-          } else {
-            echo "❌ large.txt is NOT tracked by LFS"
-            exit 1
-          }
+          :: Display tracked LFS files
+          echo LFS tracked files:
+          git lfs ls-files
           
-          # Verify large.jpg is tracked
-          if ($lfsFiles -match "large\.jpg") {
-            echo "✅ large.jpg is tracked by LFS as expected"
-          } else {
-            echo "❌ large.jpg is NOT tracked by LFS"
-            exit 1
-          }
+          :: Check if large.txt is tracked by LFS
+          git lfs ls-files | findstr "large.txt" > nul
+          if %ERRORLEVEL% == 0 (
+            echo ✅ large.txt is tracked by LFS as expected
+          ) else (
+            echo ❌ large.txt is NOT tracked by LFS
+            exit /b 1
+          )
           
-          # Check .gitattributes content
-          $gitAttributes = Get-Content .gitattributes
-          echo "Git attributes content:"
-          echo $gitAttributes
+          :: Check if large.jpg is tracked by LFS
+          git lfs ls-files | findstr "large.jpg" > nul
+          if %ERRORLEVEL% == 0 (
+            echo ✅ large.jpg is tracked by LFS as expected
+          ) else (
+            echo ❌ large.jpg is NOT tracked by LFS
+            exit /b 1
+          )
           
-          # Verify .gitattributes contains proper LFS patterns
-          if ($gitAttributes -match "large\.jpg filter=lfs" -and $gitAttributes -match "large\.txt filter=lfs") {
-            echo "✅ .gitattributes contains correct LFS patterns"
-          } else {
-            echo "❌ .gitattributes does not contain expected LFS patterns"
-            exit 1
-          }
+          :: Display .gitattributes content
+          echo Git attributes content:
+          type .gitattributes
+          
+          :: Check if .gitattributes contains proper patterns
+          findstr /C:"large.jpg filter=lfs" .gitattributes > nul
+          set jpg_found=%ERRORLEVEL%
+          
+          findstr /C:"large.txt filter=lfs" .gitattributes > nul
+          set txt_found=%ERRORLEVEL%
+          
+          if %jpg_found% == 0 (
+            if %txt_found% == 0 (
+              echo ✅ .gitattributes contains correct LFS patterns
+            ) else (
+              echo ❌ .gitattributes does not contain expected LFS patterns
+              exit /b 1
+            )
+          ) else (
+            echo ❌ .gitattributes does not contain expected LFS patterns
+            exit /b 1
+          )
